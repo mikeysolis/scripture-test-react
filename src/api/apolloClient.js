@@ -1,5 +1,8 @@
 import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client';
 
+// Function: createApolloClient
+// Creates the actual client that will be used to access
+// and query data from the api.
 function createApolloClient() {
   const URI = 'https://lds-scripture-api.herokuapp.com/v1/graphql';
 

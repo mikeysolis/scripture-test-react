@@ -6,10 +6,16 @@ import {
   GET_BOOKS,
 } from './api/queries';
 
+// Function: Home
+// The main component that runs the Home page. Below are
+// additional components included in this one.
 function Home() {
+  // Load in the initial books from the New Testament for the
+  // Books Select dropdown. This is loaded immediately.
   const { data, loading, error } = useQuery(GET_BOOKS, {
     variables: { volumeId: 2 },
   });
+  // Set up apollo queries that will be used at a later time.
   const [getChapters, chaptersResults] = useLazyQuery(GET_CHAPTERS);
   const [getVerses, versesResults] = useLazyQuery(GET_VERSES);
   const [getVerseById, verseByIdResults] = useLazyQuery(GET_VERSE_BY_ID);
@@ -60,6 +66,11 @@ function Home() {
   );
 }
 
+// Function: BookSelect
+// @Param: data - the initial book data retrieved upon page load.
+// @Param: onChangeHandler - the change handler created from
+// Apollo's useLazyQuery (getChapters)
+// This component displays the Book Select form input
 const BookSelect = ({ data, onChangeHandler }) => {
   return (
     <select
@@ -78,6 +89,12 @@ const BookSelect = ({ data, onChangeHandler }) => {
   );
 };
 
+// Function: const ChapterSelect = ({ chaptersResults, onChangeHandler }) => {
+// @Param: chaptersResults - the chapter results retrieved after selecting from the
+// books select.
+// @Param: onChangeHandler - the change handler created from
+// Apollo's useLazyQuery (getVerses)
+// This component displays the Chapters Select form input
 const ChapterSelect = ({ chaptersResults, onChangeHandler }) => {
   const { data, loading } = chaptersResults;
 
@@ -105,6 +122,12 @@ const ChapterSelect = ({ chaptersResults, onChangeHandler }) => {
   );
 };
 
+// Function: const VerseSelect = ({ versesResults, onChangeHandler }) => {
+// @Param: versesResults - the verses results retrieved after selecting from the
+// verses select.
+// @Param: onChangeHandler - the change handler created from
+// Apollo's useLazyQuery (getVerseById)
+// This component displays the Verse Select form input
 const VerseSelect = ({ versesResults, onChangeHandler }) => {
   const { data, loading } = versesResults;
 
@@ -131,6 +154,9 @@ const VerseSelect = ({ versesResults, onChangeHandler }) => {
   );
 };
 
+// Function: const VerseDisplay = ({ verseByIdResults }) => {
+// @Param: verseByIdResults - the individual verseId
+// This component displays the actual verse selected
 const VerseDisplay = ({ verseByIdResults }) => {
   const { data, loading, error } = verseByIdResults;
 

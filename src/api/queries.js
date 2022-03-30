@@ -1,3 +1,5 @@
+// The queries used in the app for retrieving data from Apollo.
+
 import { gql } from '@apollo/client';
 
 const GET_VOLUMES = gql`

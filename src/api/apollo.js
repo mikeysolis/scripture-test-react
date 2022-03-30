@@ -3,6 +3,11 @@ import createApolloClient from './apolloClient';
 
 let apolloClient;
 
+// Function: initializeApollo
+// @Param: intialState - if state already exists pass it in
+// This function initializes apollo with either a new instance
+// of apollo or the cache of an existing instance. Prevents multiple
+// instances of apollo from being created.
 export function initializeApollo(initialState = null) {
   const _apolloClient = apolloClient ?? createApolloClient();
 
@@ -25,6 +30,9 @@ export function initializeApollo(initialState = null) {
   return _apolloClient;
 }
 
+// Function: useApollo
+// @Param: the newly created apollo instance
+// Sets up apollo for use in the app
 export function useApollo(initialState) {
   const store = useMemo(() => initializeApollo(initialState), [initialState]);
   return store;
